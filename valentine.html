@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Will You Be My Valentine? 💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 25px;
+      text-align: center;
+      max-width: 380px;
+      width: 90%;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      position: relative;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #ff4d6d;
+      font-size: 2.4rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #555;
+      font-size: 1.05rem;
+      margin-bottom: 25px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .yes {
+      background: #ff4d6d;
+      color: white;
+      box-shadow: 0 10px 20px rgba(255,77,109,0.4);
+    }
+
+    .yes:hover {
+      transform: scale(1.1);
+    }
+
+    .no {
+      background: #eee;
+      color: #666;
+      position: relative;
+    }
+
+    .no:hover {
+      transform: translate(
+        calc(-50px + 100px * Math.random()),
+        calc(-50px + 100px * Math.random())
+      );
+    }
+
+    .hearts span {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: rise 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+      }
+      20% { opacity: 1; }
+      100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .love-message {
+      font-family: 'Pacifico', cursive;
+      color: #ff4d6d;
+      font-size: 2rem;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="card">
+    <h1>Hey my love 💕</h1>
+    <p>
+      Every moment with you makes my heart smile.<br>
+      So I have just one very important question…
+    </p>
+
+    <h1>Will you be my Valentine? 💘</h1>
+
+    <div class="buttons">
+      <button class="yes" onclick="sayYes()">Yes 💖</button>
+      <button class="no" id="noBtn">No 🙈</button>
+    </div>
+
+    <div class="love-message hidden" id="loveMessage">
+      YAY!! 💕<br>
+      You just made me the happiest person ever 🥰
+    </div>
+  </div>
+
+  <div class="hearts" id="hearts"></div>
+
+  <script>
+    const heartsContainer = document.getElementById("hearts");
+    const loveMessage = document.getElementById("loveMessage");
+    const noBtn = document.getElementById("noBtn");
+
+    // Floating hearts generator
+    setInterval(() => {
+      const heart = document.createElement("span");
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+      heartsContainer.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
+    }, 400);
+
+    // Make "No" button dodge the mouse
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    function sayYes() {
+      loveMessage.classList.remove("hidden");
+      document.querySelector(".buttons").classList.add("hidden");
+    }
+  </script>
+
+</body>
+</html>
